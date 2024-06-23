@@ -26,4 +26,14 @@ SELECT customers.name,customers.email, orders.item, orders.price
 FROM customers
  LEFT OUTER JOIN orders
  ON customers.id = orders.customer_id;
+
+-- Now, create another query that will result in one row per each customer, with their name, email, and total amount of money they've spent on orders. Sort the rows according to the total money spent, from the most spent to the least spent.
+-- (Tip: You should always GROUP BY on the column that is most likely to be unique in a row.)
+
+SELECT customers.name, customers.email, SUM(orders.price) AS "total"
+ FROM customers
+ LEFT OUTER JOIN orders
+ ON customers.id = orders.customer_id
+ GROUP BY customers.id
+ ORDER BY orders.price DESC;
  
